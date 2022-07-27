@@ -10,6 +10,12 @@ export default function Form(props) {
       submit()
    }
 
+   const onChange = event => {
+      const { name, value, checked, type } = event
+      const valueToUse = type === 'checkbox' ? checked : value
+      change(name, valueToUse)
+   }
+
 
    return (
       <form className='form container' onSubmit={onSubmit}>
@@ -19,7 +25,10 @@ export default function Form(props) {
                Name
                <span className='name input-box'>
                   <input
-
+                     type='text'
+                     value={values.name}
+                     onChange={onChange}
+                     name='name'
                   />
                </span>
             </label>
@@ -28,7 +37,10 @@ export default function Form(props) {
                Email
                <span className='email input-box'>
                   <input
-
+                     type={'text'}
+                     name='email'
+                     value={values.email}
+                     onChange={onChange}
                   />
                </span>
             </label>
@@ -37,7 +49,22 @@ export default function Form(props) {
                Password
                <span className='password input-box'>
                   <input
+                     type={'text'}
+                     name='password'
+                     value={values.password}
+                     onChange={onChange}
+                  />
+               </span>
+            </label>
 
+            <label>
+               Confirm Password
+               <span className='password input-box'>
+                  <input
+                     type={'text'}
+                     name='confirmPassword'
+                     value={values.confirmPassword}
+                     onChange={onChange}
                   />
                </span>
             </label>
@@ -51,7 +78,9 @@ export default function Form(props) {
                   <p>I agree to the terms of service</p>
                   <input
                      type='checkbox'
-
+                     name='terms'
+                     checked={values.terms}
+                     onChange={onChange}
                   />
                </span>
             </label>

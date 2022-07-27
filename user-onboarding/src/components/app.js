@@ -9,6 +9,7 @@ const initialFormValues = {
    name: '',
    email: '',
    password: '',
+   confirmPassword: '',
    terms: '',
 }
 
@@ -16,6 +17,7 @@ const initialFormErrors = {
    name: '',
    email: '',
    password: '',
+   confirmPassword: '',
    terms: ''
 }
 
