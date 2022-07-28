@@ -4,9 +4,11 @@ import axios from 'axios'
 
 import Form from './form'
 import schema from './formSchema'
+import Users from './users'
 
 const initialFormValues = {
-   name: '',
+   nameFirst: '',
+   nameLast: '',
    email: '',
    password: '',
    confirmPassword: '',
@@ -14,7 +16,8 @@ const initialFormValues = {
 }
 
 const initialFormErrors = {
-   name: '',
+   nameFirst: '',
+   nameLast: '',
    email: '',
    password: '',
    confirmPassword: '',
@@ -22,13 +25,35 @@ const initialFormErrors = {
 }
 
 const initialDisabled = true
-const initialUser = []
+const initialUsers = []
 
 function App() {
-   const [user, setUser] = useState(initialUser)
+   const [users, setUsers] = useState(initialUsers)
    const [formValues, setFormValues] = useState(initialFormValues)
    const [errors, setErrors] = useState(initialFormErrors)
    const [disabled, setDisabled] = useState(initialDisabled)
+
+   const getUsers = () => {
+      axios
+         .get(`https://reqres.in/api/users`)
+         .then(res => {
+            setUsers(res.data.data)
+         })
+         .catch(err => {
+            console.log(err)
+         })
+   }
+
+   useEffect(() => {
+      getUsers()
+   }, [])
+
+
+   useEffect(() => {
+      schema.isValid(formValues).then(valid => {
+         setDisabled(!valid)
+      })
+   }, [formValues])
 
    const changeInput = (name, value) => {
       yup
@@ -40,13 +65,15 @@ function App() {
          .catch(err => {
             setErrors({ ...errors, [name]: err.errors })
          })
+
+      setFormValues({ ...formValues, [name]: value })
    }
 
    const postNewUser = (newUser) => {
       axios
-         .post()
+         .post(`https://reqres.in/api/users`, newUser)
          .then(res => {
-            setUser([...user, res.data])
+            setUsers([...users, res.data.data])
             setFormValues(initialFormValues)
          })
          .catch(err => {
@@ -56,10 +83,11 @@ function App() {
 
    const submitForm = () => {
       const newUser = {
-         name: formValues.name.trim().toLowerCase(),
+         nameFirst: formValues.nameFirst.trim().toLowerCase(),
+         nameLast: formValues.nameLast.trim().toLowerCase(),
          email: formValues.email.trim().toLowerCase(),
          password: formValues.password.trim(),
-         terms: formValues.terms.trim()
+         terms: formValues.terms
       }
       postNewUser(newUser)
    }
@@ -74,6 +102,16 @@ function App() {
             change={changeInput}
             values={formValues}
          />
+
+         <div className='user-container container'>
+            {
+               users.map(elem => {
+                  return (
+                     <Users key={elem.id} details={elem} />
+                  )
+               })
+            }
+         </div>
       </div>
    );
 }
