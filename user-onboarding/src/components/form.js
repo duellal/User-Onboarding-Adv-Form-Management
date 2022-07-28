@@ -11,11 +11,10 @@ export default function Form(props) {
    }
 
    const onChange = event => {
-      const { name, value, checked, type } = event
+      const { name, value, checked, type } = event.target
       const valueToUse = type === 'checkbox' ? checked : value;
       change(name, valueToUse)
    }
-
 
    return (
       <form className='form container' onSubmit={onSubmit}>
@@ -26,12 +25,12 @@ export default function Form(props) {
                <span className='first-name input-box'>
                   <input
                      type='text'
-                     value={values.nameFirst}
+                     value={values.first_name}
                      onChange={onChange}
-                     name='nameFirst'
+                     name='first_name'
                   />
                </span>
-               <div className='error'>{errors.nameFirst}</div>
+               <div className='error'>{errors.first_name}</div>
             </label>
 
             <label>
@@ -39,12 +38,12 @@ export default function Form(props) {
                <span className='last-name input-box'>
                   <input
                      type='text'
-                     value={values.nameLast}
+                     value={values.last_name}
                      onChange={onChange}
-                     name='nameLast'
+                     name='last_name'
                   />
                </span>
-               <div className='error'>{errors.nameLast}</div>
+               <div className='error'>{errors.last_name}</div>
             </label>
 
             <label>
@@ -58,6 +57,25 @@ export default function Form(props) {
                   />
                </span>
                <div className='error'>{errors.email}</div>
+            </label>
+
+            <label>
+               Role
+               <span className='role input-box'>
+                  <select
+                     name='role'
+                     value={values.role}
+                     onChange={onChange}
+                  >
+                     <option value=''>Select Role</option>
+                     <option value='Back End Developer'>Back End Developer</option>
+                     <option value='Data Scientist'>Data scientist</option>
+                     <option value='Front End Developer'>Front End Developer</option>
+                     <option value='Team Lead'>Team Lead</option>
+                     <option value='UX Designer'>UX Designer</option>
+                  </select>
+               </span>
+               <div className='error'>{errors.role}</div>
             </label>
 
             <label>
@@ -93,7 +111,7 @@ export default function Form(props) {
                      Lorem Ipsum...
                   </p>
                </div>
-               <span className='terms input-box'>
+               <span className='formTerms input-box'>
                   <p>I agree to the terms of service</p>
                   <input
                      type='checkbox'

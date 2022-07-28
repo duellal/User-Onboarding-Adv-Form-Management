@@ -7,21 +7,23 @@ import schema from './formSchema'
 import Users from './users'
 
 const initialFormValues = {
-   nameFirst: '',
-   nameLast: '',
+   first_name: '',
+   last_name: '',
    email: '',
+   role: '',
    password: '',
    confirmPassword: '',
-   terms: '',
+   terms: false
 }
 
 const initialFormErrors = {
-   nameFirst: '',
-   nameLast: '',
+   first_name: '',
+   last_name: '',
    email: '',
+   role: '',
    password: '',
    confirmPassword: '',
-   terms: ''
+   terms: false
 }
 
 const initialDisabled = true
@@ -73,7 +75,7 @@ function App() {
       axios
          .post(`https://reqres.in/api/users`, newUser)
          .then(res => {
-            setUsers([...users, res.data.data])
+            setUsers([res.data, ...users])
             setFormValues(initialFormValues)
          })
          .catch(err => {
@@ -83,10 +85,12 @@ function App() {
 
    const submitForm = () => {
       const newUser = {
-         nameFirst: formValues.nameFirst.trim().toLowerCase(),
-         nameLast: formValues.nameLast.trim().toLowerCase(),
+         first_name: formValues.first_name.trim(),
+         last_name: formValues.last_name.trim(),
          email: formValues.email.trim().toLowerCase(),
+         role: formValues.role.trim(),
          password: formValues.password.trim(),
+         confirmPassword: formValues.confirmPassword.trim(),
          terms: formValues.terms
       }
       postNewUser(newUser)
@@ -112,7 +116,7 @@ function App() {
                })
             }
          </div>
-      </div>
+      </div >
    );
 }
 

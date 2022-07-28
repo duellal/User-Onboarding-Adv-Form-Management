@@ -1,16 +1,18 @@
 import * as yup from 'yup'
 
 export default yup.object().shape({
-   nameFirst: yup.string()
+   first_name: yup.string()
       .min(3, 'First name must be at least 3 characters long')
       .required('First name is required'),
 
-   nameLast: yup.string()
+   last_name: yup.string()
       .min(3, 'Last name must be at least 2 characters long'),
 
    email: yup.string()
       .email('Enter a valid email')
       .required('Enter an email'),
+
+   role: yup.string(),
 
    password: yup.string()
       .required('Enter a password')
@@ -18,8 +20,8 @@ export default yup.object().shape({
          "Password must contain at least 8 characters, one uppercase, one number and one special case character"),
 
    confirmPassword: yup.string()
-      .required('Enter above password')
-      .oneOf([yup.ref('password'), null], 'Passwords must match'),
+      .oneOf([yup.ref('password'), null], 'Passwords do not match')
+      .required('Enter above password'),
 
    terms: yup.boolean()
 })
