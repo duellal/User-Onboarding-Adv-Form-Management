@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import * as yup from 'yup'
+import React from 'react'
 
 export default function Form(props) {
    const { submit, errors, disabled, values, change } = props
