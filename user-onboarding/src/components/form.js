@@ -1,4 +1,5 @@
 import React from 'react'
+import { termsText1, termsText2, termsText3, termsText4, termsText5 } from './termsText'
 
 export default function Form(props) {
    const { submit, errors, disabled, values, change } = props
@@ -123,7 +124,19 @@ export default function Form(props) {
             <h3>Terms of Service</h3>
             <div className='terms'>
                <p>
-                  Lorem Ipsum...
+                  {termsText1}
+               </p>
+               <p>
+                  {termsText2}
+               </p>
+               <p>
+                  {termsText3}
+               </p>
+               <p>
+                  {termsText4}
+               </p>
+               <p>
+                  {termsText5}
                </p>
             </div>
             <div className='checkbox input-box'>

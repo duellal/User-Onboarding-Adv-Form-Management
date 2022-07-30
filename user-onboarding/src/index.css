@@ -128,10 +128,13 @@ form,
 }
 
 .terms {
-  display: flex;
-  justify-content: center;
+  text-align: justify;
   border: 1px solid black;
   width: 80%;
+  height: 40vh;
+  overflow: auto;
+  text-indent: 6%;
+  padding: 0 5%;
 }
 
 .checkbox {
