@@ -11,16 +11,9 @@ export default function Users({ details }) {
 
    return (
       <div className='user container'>
-         {/* <div className='userName'> */}
          <h2 className='userName'>{details.first_name} {details.last_name}</h2>
-         {/* </div> */}
-         {/* <div className='userEmail'> */}
          <p className='userEmail'>Email: {details.email}</p>
-         {/* </div> */}
-         {/* <div className='userRole'> */}
          <p className='userRole'>Role: {details.role}</p>
-         {/* </div> */}
-         {/* <div className='userTerms'> */}
          <div className='userTermsDiv'>
             <p className='userTerms question'>Agreed to Terms?</p>
             <p className='userTerms answer'>
