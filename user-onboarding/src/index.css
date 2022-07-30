@@ -1,6 +1,6 @@
 * {
   /* Used for styling purposes */
-  /* border: 1px solid black; */
+  /* border: 2px solid black; */
 }
 
 body {
@@ -29,8 +29,6 @@ h1 {
 }
 
 h2 {
-  display: flex;
-  justify-content: center;
   width: 100%;
   font-size: 2rem;
 }
@@ -42,7 +40,6 @@ h3 {
 }
 
 p {
-  display: flex;
   justify-content: center;
   font-weight: 500;
   font-size: 1.2rem;
@@ -75,11 +72,9 @@ option {
   flex-wrap: wrap;
 }
 
+/* Creating the color scheme, text styling, and how wide the form and user divs are  */
 form,
 .user.container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
   width: 45%;
   border: .5rem solid #D9F8C4;
   background-color: #D75281;
@@ -87,6 +82,7 @@ form,
   margin: 1%;
 }
 
+/* Styling the form: */
 .input-box {
   padding: 4% 0;
 }
@@ -173,4 +169,31 @@ form,
 
 .submit:hover {
   font-weight: bold;
+}
+
+/* Styling the user divs */
+.userName,
+.userEmail,
+.userRole {
+  width: 60%;
+}
+
+.userTermsDiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.userTerms {
+  display: flex;
+}
+
+.question {
+  justify-content: center;
+  width: 50%
+}
+
+.answer {
+  justify-content: start;
+  text-indent: 10%;
 }
