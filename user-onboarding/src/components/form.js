@@ -2,7 +2,8 @@ import React from 'react'
 import { termsText1, termsText2, termsText3, termsText4, termsText5 } from './termsText'
 
 export default function Form(props) {
-   const { submit, errors, disabled, values, change } = props
+   const { submit, errors, disabled,
+      values, change } = props
 
    const onSubmit = event => {
       event.preventDefault()

@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-export default yup.object().shape({
+const formSchema = yup.object().shape({
    first_name: yup.string()
       .min(3, 'First name must be at least 3 characters long')
       .required('First name is required'),
@@ -25,3 +25,5 @@ export default yup.object().shape({
 
    terms: yup.boolean()
 })
+
+export default formSchema

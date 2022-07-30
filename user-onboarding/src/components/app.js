@@ -3,7 +3,7 @@ import * as yup from 'yup'
 import axios from 'axios'
 
 import Form from './form'
-import schema from './formSchema'
+import formSchema from './formSchema'
 import Users from './users'
 
 const initialFormValues = {
@@ -34,12 +34,16 @@ function App() {
    const [formValues, setFormValues] = useState(initialFormValues)
    const [errors, setErrors] = useState(initialFormErrors)
    const [disabled, setDisabled] = useState(initialDisabled)
+   const [usedEmail, setUsedEmail] = useState(initialUsers)
 
    const getUsers = () => {
       axios
          .get(`https://reqres.in/api/users`)
          .then(res => {
             setUsers(res.data.data)
+            setUsedEmail(res.data.data.map(person => {
+               return ({ email: person.email })
+            }))
          })
          .catch(err => {
             console.log(err)
@@ -52,14 +56,15 @@ function App() {
 
 
    useEffect(() => {
-      schema.isValid(formValues).then(valid => {
+      formSchema.isValid(formValues).then(valid => {
          setDisabled(!valid)
       })
    }, [formValues])
 
+
    const changeInput = (name, value) => {
       yup
-         .reach(schema, name)
+         .reach(formSchema, name)
          .validate(value)
          .then(() => {
             setErrors({ ...errors, [name]: '' })
@@ -83,6 +88,16 @@ function App() {
          })
    }
 
+   // Figuring out where to put this: error from inputting a duplicate email - taking a break
+   const findEmail = (email) => {
+      for (let i = 0; i < usedEmail.length; i++) {
+         if (email === usedEmail[i]) {
+            return 'That email already exists, please enter a new email or edit the user with that email'
+         }
+      }
+   }
+
+
    const submitForm = () => {
       const newUser = {
          first_name: formValues.first_name.trim(),
@@ -105,6 +120,7 @@ function App() {
             errors={errors}
             change={changeInput}
             values={formValues}
+         // findEmail={findEmail}
          />
 
          <div className='user-container container'>
