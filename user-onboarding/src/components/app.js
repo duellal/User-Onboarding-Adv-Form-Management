@@ -34,16 +34,17 @@ function App() {
    const [formValues, setFormValues] = useState(initialFormValues)
    const [errors, setErrors] = useState(initialFormErrors)
    const [disabled, setDisabled] = useState(initialDisabled)
-   const [usedEmail, setUsedEmail] = useState(initialUsers)
+   // const [usedEmail, setUsedEmail] = useState(initialUsers)
+   const [dupEmailErr, setDupEmailErr] = useState()
 
    const getUsers = () => {
       axios
          .get(`https://reqres.in/api/users`)
          .then(res => {
             setUsers(res.data.data)
-            setUsedEmail(res.data.data.map(person => {
-               return ({ email: person.email })
-            }))
+            // setUsedEmail(res.data.data.map(person => {
+            //    return ({ email: person.email })
+            // }))
          })
          .catch(err => {
             console.log(err)
@@ -89,13 +90,15 @@ function App() {
    }
 
    // Figuring out where to put this: error from inputting a duplicate email - taking a break
-   const findEmail = (email) => {
-      for (let i = 0; i < usedEmail.length; i++) {
-         if (email === usedEmail[i]) {
-            return 'That email already exists, please enter a new email or edit the user with that email'
-         }
-      }
-   }
+   // const findEmail = (email) => {
+   //    for (let i = 0; i < usedEmail.length; i++) {
+   //       if (email === usedEmail[i].email) {
+   //          console.log('That email already exists, please enter a new email or edit the user with that email')
+   //       }
+   //    }
+   // }
+
+   // console.log(findEmail('alexandriaduell@gmail.com'))
 
 
    const submitForm = () => {
@@ -108,7 +111,18 @@ function App() {
          confirmPassword: formValues.confirmPassword.trim(),
          terms: formValues.terms
       }
-      postNewUser(newUser)
+
+      for (let i = 0; i < users.length; i++) {
+         if (newUser.email === users[i].email) {
+            const emailErr = 'That email already exists, please enter a new email or edit the user with that email'
+
+            setDupEmailErr(emailErr)
+
+            return dupEmailErr
+         }
+         else (postNewUser(newUser))
+      }
+      return dupEmailErr
    }
 
    return (
@@ -120,7 +134,7 @@ function App() {
             errors={errors}
             change={changeInput}
             values={formValues}
-         // findEmail={findEmail}
+            duplicateErr={dupEmailErr}
          />
 
          <div className='user-container container'>

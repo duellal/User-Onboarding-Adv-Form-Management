@@ -3,7 +3,7 @@ import { termsText1, termsText2, termsText3, termsText4, termsText5 } from './te
 
 export default function Form(props) {
    const { submit, errors, disabled,
-      values, change } = props
+      values, change, duplicateErr } = props
 
    const onSubmit = event => {
       event.preventDefault()
@@ -63,7 +63,9 @@ export default function Form(props) {
                         onChange={onChange}
                      />
                   </div>
-                  <div className='error'>{errors.email}</div>
+                  <div className='error'>{errors.email || duplicateErr}
+                  </div>
+
                </label>
             </div>
 
