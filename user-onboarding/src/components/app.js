@@ -114,7 +114,7 @@ function App() {
 
       for (let i = 0; i < users.length; i++) {
          if (newUser.email === users[i].email) {
-            const emailErr = 'That email already exists, please enter a new email or edit the user with that email'
+            const emailErr = 'That email already exists, please enter a new email'
 
             setDupEmailErr(emailErr)
 
