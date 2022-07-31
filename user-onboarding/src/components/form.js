@@ -5,19 +5,17 @@ export default function Form(props) {
    const { submit, errors, disabled,
       values, change, duplicateErr } = props
 
-   const onSubmit = event => {
-      event.preventDefault()
-      submit()
-   }
-
+   //This checks for the name and value of what is being changed
    const onChange = event => {
       const { name, value, checked, type } = event.target
+      //This allows the checkbox to be clicked on and off
       const valueToUse = type === 'checkbox' ? checked : value;
       change(name, valueToUse)
    }
 
+   //'HTML' for the form component
    return (
-      <form className='form container' onSubmit={onSubmit}>
+      <form className='form container' onSubmit={submit}>
          <h2>Add User</h2>
          <div className='name'>
             <div className='first-name'>
@@ -63,7 +61,9 @@ export default function Form(props) {
                         onChange={onChange}
                      />
                   </div>
-                  <div className='error'>{errors.email || duplicateErr}
+                  <div className='error'>
+                     {errors.email}
+                     {duplicateErr}
                   </div>
 
                </label>

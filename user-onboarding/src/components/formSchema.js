@@ -1,5 +1,6 @@
 import * as yup from 'yup'
 
+//Requiring certain aspects for the input in the form. Has to be true in order for it to be submitted to the backend api
 const formSchema = yup.object().shape({
    first_name: yup.string()
       .min(3, 'First name must be at least 3 characters long')
