@@ -27,6 +27,7 @@ export default function Form(props) {
                         value={values.first_name}
                         onChange={onChange}
                         name='first_name'
+                        id='firstName'
                      />
                   </div>
                   <div className='error'>{errors.first_name}</div>
@@ -42,6 +43,7 @@ export default function Form(props) {
                         value={values.last_name}
                         onChange={onChange}
                         name='last_name'
+                        id='lastName'
                      />
                   </div>
                   <div className='error'>{errors.last_name}</div>
@@ -59,6 +61,7 @@ export default function Form(props) {
                         name='email'
                         value={values.email}
                         onChange={onChange}
+                        id='email'
                      />
                   </div>
                   <div className='error'>
@@ -77,6 +80,7 @@ export default function Form(props) {
                         name='role'
                         value={values.role}
                         onChange={onChange}
+                        id='role'
                      >
                         <option value=''>Select Role</option>
                         <option value='Back End Developer'>Back End Developer</option>
@@ -101,6 +105,7 @@ export default function Form(props) {
                         name='password'
                         value={values.password}
                         onChange={onChange}
+                        id='password'
                      />
                   </div>
                   <div className='error'>{errors.password}</div>
@@ -116,6 +121,7 @@ export default function Form(props) {
                         name='confirmPassword'
                         value={values.confirmPassword}
                         onChange={onChange}
+                        id='confirmPassword'
                      />
                   </div>
                   <div className='error'>{errors.confirmPassword}</div>
@@ -150,6 +156,7 @@ export default function Form(props) {
                         name='terms'
                         checked={values.terms}
                         onChange={onChange}
+                        id='terms'
                      />
                   </label>
                </div>

@@ -9,7 +9,10 @@ describe('User Onboarding MVPs', () => {
   const passInput = () => cy.get('input[name="password"]')
   const confirmPassInput = () => cy.get('input[name="confirmPassword"]')
   const termsCheckbox = () => cy.get('input[name="terms"]')
-  const submitButton = () => cy.get('button[class="submit"]')
+  //const submitButton = () => cy.get('button[class="submit"]') - same as below:
+  const submitButton = () => cy.get('.submit')
+  //this is erroring in cypress
+  const firstNameValErr = () => cy.get('#firstName.input-box.error')
 
   it('name input', () => {
     firstNameInput()
@@ -54,7 +57,7 @@ describe('User Onboarding MVPs', () => {
     // .should('have.prop', 'disabled', false)
     // .click()
     // .should('have.prop', 'disabled', true)
-  })
+  });
 
   it('input data + submit form?', () => {
     cy.contains('Zelda Trinity').should('not.exist')
@@ -86,5 +89,13 @@ describe('User Onboarding MVPs', () => {
       .click()
 
     cy.contains('Zelda Trinity').should('exist')
-  })
+  });
+
+  it('Validation Errors', () => {
+    firstNameInput()
+      .type('a')
+
+    firstNameValErr()
+      .contains('3 characters')
+  });
 })
