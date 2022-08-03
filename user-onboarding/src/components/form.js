@@ -30,7 +30,7 @@ export default function Form(props) {
                         id='firstName'
                      />
                   </div>
-                  <div className='error'>{errors.first_name}</div>
+                  <div className='error-first'>{errors.first_name}</div>
                </label>
             </div>
 
@@ -46,7 +46,7 @@ export default function Form(props) {
                         id='lastName'
                      />
                   </div>
-                  <div className='error'>{errors.last_name}</div>
+                  <div className='error-last'>{errors.last_name}</div>
                </label>
             </div>
          </div>
@@ -64,7 +64,7 @@ export default function Form(props) {
                         id='email'
                      />
                   </div>
-                  <div className='error'>
+                  <div className='error-email'>
                      {errors.email}
                      {duplicateErr}
                   </div>
@@ -90,7 +90,7 @@ export default function Form(props) {
                         <option value='UX Designer'>UX Designer</option>
                      </select>
                   </div>
-                  <div className='error'>{errors.role}</div>
+                  <div className='error-role'>{errors.role}</div>
                </label>
             </div>
          </div>
@@ -108,7 +108,7 @@ export default function Form(props) {
                         id='password'
                      />
                   </div>
-                  <div className='error'>{errors.password}</div>
+                  <div className='error-pw'>{errors.password}</div>
                </label>
             </div>
 
@@ -124,7 +124,7 @@ export default function Form(props) {
                         id='confirmPassword'
                      />
                   </div>
-                  <div className='error'>{errors.confirmPassword}</div>
+                  <div className='error-confirmPw'>{errors.confirmPassword}</div>
                </label>
             </div>
          </div>
@@ -162,7 +162,7 @@ export default function Form(props) {
                </div>
                <p>I agree to the terms of service</p>
             </div>
-            <div className='error'>{errors.terms}</div>
+            <div className='error-terms'>{errors.terms}</div>
          </div>
 
 

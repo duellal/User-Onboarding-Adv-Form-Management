@@ -11,8 +11,11 @@ describe('User Onboarding MVPs', () => {
   const termsCheckbox = () => cy.get('input[name="terms"]')
   //const submitButton = () => cy.get('button[class="submit"]') - same as below:
   const submitButton = () => cy.get('.submit')
-  //this is erroring in cypress
-  const firstNameValErr = () => cy.get('#firstName.input-box.error')
+  const firstNameValErr = () => cy.get('div[class="error-first"]')
+  const lastNameValErr = () => cy.get('div[class="error-last"]')
+  const emailValErr = () => cy.get('div[class="error-email"]')
+  const pwValErr = () => cy.get('div[class="error-pw"]')
+  const confirmPwValErr = () => cy.get('div[class="error-confirmPw"]')
 
   it('name input', () => {
     firstNameInput()
@@ -91,11 +94,45 @@ describe('User Onboarding MVPs', () => {
     cy.contains('Zelda Trinity').should('exist')
   });
 
-  it('Validation Errors', () => {
+  it('Validation Errors after typing in input boxes', () => {
+    firstNameValErr()
+      .should('be.hidden')
     firstNameInput()
       .type('a')
-
     firstNameValErr()
-      .contains('3 characters')
+      .should('not.be.hidden')
+      .should('have.text', 'First name must be at least 3 characters long')
+
+    lastNameValErr()
+      .should('be.hidden')
+    lastNameInput()
+      .type('b')
+    lastNameValErr()
+      .should('not.be.hidden')
+      .should('have.text', 'Last name must be at least 2 characters long')
+
+    emailValErr()
+      .should('be.hidden')
+    emailInput()
+      .type('c')
+    emailValErr()
+      .should('not.be.hidden')
+      .should('have.text', 'Enter a valid email')
+
+    pwValErr()
+      .should('be.hidden')
+    passInput()
+      .type('d')
+    pwValErr()
+      .should('not.be.hidden')
+      .should('have.text', 'Password must contain at least 8 characters, one uppercase, one number and one special case character')
+
+    confirmPwValErr()
+      .should('be.hidden')
+    confirmPassInput()
+      .type('e')
+    confirmPwValErr()
+      .should('not.be.hidden')
+      .should('have.text', 'Passwords do not match')
   });
 })
