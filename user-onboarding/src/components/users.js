@@ -8,12 +8,14 @@ export default function Users({ details }) {
       )
    }
 
+   console.log(details)
+
    //Making an array of the details in order to map over it to change the answer of if the user agreed to the terms of agreement on their card (see line 23-31)
    const detailsArr = new Array(details)
 
    //Returning "html" for the Users component in order to pass it to the app component
    return (
-      <div className='user container'>
+      <div className={`user container ${details.id}`}>
          <h2 className='userName'>{details.first_name} {details.last_name}</h2>
          <p className='userEmail'>Email: {details.email}</p>
          <p className='userRole'>Role: {details.role}</p>
