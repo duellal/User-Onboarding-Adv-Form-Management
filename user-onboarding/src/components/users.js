@@ -13,7 +13,7 @@ export default function Users({ details }) {
 
    //Returning "html" for the Users component in order to pass it to the app component
    return (
-      <div className='user container'>
+      <div className={`user container`}>
          <h2 className='userName'>{details.first_name} {details.last_name}</h2>
          <p className='userEmail'>Email: {details.email}</p>
          <p className='userRole'>Role: {details.role}</p>
