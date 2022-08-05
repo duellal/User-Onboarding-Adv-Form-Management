@@ -175,6 +175,9 @@ describe('Stretch - form on load', () => {
       .should((p) => {
         const text = p.map((i, el) => Cypress.$(el).text())
         const paragraphs = text.get()
+        console.log(`p:`, p)
+        console.log(`text:`, text)
+        console.log(`paragraphs:`, paragraphs)
 
         expect(paragraphs, 'has 5 paragraphs').to.have.length(5)
 
@@ -212,46 +215,59 @@ describe('Stretch - form on load', () => {
   })
 })
 
-describe.only('Stretch - On submit, creates a new div card with info from inputs', () => {
+describe('Stretch - On submit, creates a new div card with info from inputs', () => {
   before(() => {
     cy.visit('http://localhost:3000')
   })
 
-  it('inputs info + submits', () => {
-    cy.contains('Zelda Trinity').should('not.exist')
+  //Want to make a new div card (above) and then count the number of div cards (should increase by 1)
+  it('Creates a new div card and adds it to the DOM', async () => {
+    //checking there are user divs in the DOM
+    cy.get('div[class="user-container container"]')
+      .find('div[class="user container"]')
+      .should((div) => {
+        const divs = div.map((i, el) => Cypress.$(el).text())
+        const divsArr = divs.get()
+
+        expect(divsArr, `has ${divsArr.length} items`).to.have.length(6)
+      })
+
+    //submits a new user div to DOM
+    cy.contains('Raja Christopher').should('not.exist')
     firstNameInput()
-      .type('Zelda')
-      .should('have.value', 'Zelda')
+      .type('Raja')
+      .should('have.value', 'Raja')
     lastNameInput()
-      .type('Trinity')
-      .should('have.value', 'Trinity')
+      .type('Christopher')
+      .should('have.value', 'Christopher')
     emailInput()
-      .type('zelda@trinity.com')
-      .should('have.value', 'zelda@trinity.com')
+      .type('raja@dog.com')
+      .should('have.value', 'raja@dog.com')
     passInput()
-      .type('Wizard$9')
-      .should('have.value', 'Wizard$9')
+      .type('d0ggyHe@ven!')
+      .should('have.value', 'd0ggyHe@ven!')
     confirmPassInput()
-      .type('Wizard$9')
-      .should('have.value', 'Wizard$9')
+      .type('d0ggyHe@ven!')
+      .should('have.value', 'd0ggyHe@ven!')
     termsCheckbox()
       .click()
     submitButton()
       .click()
-  })
 
-  //Want to make a new div card (above) and then count the number of div cards (should increase by 1)
-  it('Creates a new div card', () => {
+    //Need to wait so that the info above gets put into the DOM
+    cy.wait(1500)
+
+    //checking that the new div is in the DOM and the arrays have added one more item
     cy.get('div[class="user-container container"]')
-      .should((div) => {
-        console.log(div)
-        const divs = div.map((i, el) => Cypress.$(el).text())
-        const divsArr = divs.get()
-        console.log(divsArr)
+      .find('div[class="user container"]')
+      .should((addDiv) => {
+        const newDivs = addDiv.map((i, el) => Cypress.$(el).text())
+        const newDivsArr = newDivs.get()
 
-        // expect(divs, 'to have ')
+        expect(newDivsArr, `has ${newDivsArr.length} items`).to.have.length(7)
+
+        //Making sure that the new div card contains the intended inputted information from above
+        expect(newDivsArr[0], 'has Raja Christopher in the array').to.eql('Raja ChristopherEmail: raja@dog.comRole: Agreed to Terms?Yes')
       })
   })
-
-  //Want to make sure that the new div card contains the intended inputted information
 })
